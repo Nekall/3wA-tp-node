@@ -1,0 +1,13 @@
+extends layouts/frontend
+
+block content
+    h1 Your Amazing Many Sugar (YAMS) Game !
+    p Right now you can win pastries by participating to our great contest
+    h3 Rules :
+    p To win you must have :
+    ul
+        li Yams corresponds to 3 pastries won at random. One Yams: 5 identical dice.
+        li A square corresponds to 2 pastries won at random. A square: 4 identical dice among the 5.
+        li A double (double pair) is 1 pastry won at random. A double: 2 identical dice among the 5.
+        form.ui.large.form(method="post", action="/game")
+            button(type="submit") START 🎲

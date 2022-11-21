@@ -1,0 +1,17 @@
+extends layouts/frontend
+
+block content
+    h1 Your Amazing Many Sugar (YAMS) Game !
+    hr
+    h2 Here is the sequence of dice that you rolled :
+    for dice in dicesYams
+        span.dices= dice
+    h2 Result : 
+    if yamsResult === 0
+        p You loose !
+    else
+        div
+            p You win #{yamsResult} pastries !
+            h2 Here is your prize
+            for pastry in pastriesWin
+                p= pastry.name

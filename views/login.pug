@@ -1,0 +1,25 @@
+extends layouts/frontend
+
+block content
+    .ui.middle.aligned.center.aligned.grid
+        .six.wide.column
+            if typeof email !== "undefined" 
+                if email.length > 0
+                    p(class="__error")= email
+
+            if typeof password !== "undefined" 
+                if password.length > 0
+                    p(class="__error")= password
+
+            form.ui.large.form(method="post", action="/login")
+                .ui.stacked.segment
+                    +field('email', 'email', 'your.email@address.com')
+                    +field('password', 'password', 'Password')
+                    button(type="submit").ui.fluid.large.brown.submit.button Login
+
+
+mixin field(type, name, placeholder)
+    .field
+        .ui.left.icon.input
+            i.icon(class=(type === 'password' ? 'lock' : 'user'))
+            input(type=type, name=name, placeholder=placeholder)

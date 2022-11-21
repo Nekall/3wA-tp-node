@@ -1,0 +1,36 @@
+extends layouts/frontend
+
+block content
+    .ui.middle.aligned.center.aligned.grid
+        .six.wide.column
+            if typeof firstName !== "undefined" 
+                if firstName.length > 0
+                    p(class="__error")= firstName
+
+            if typeof lastName !== "undefined" 
+                if lastName.length > 0
+                    p(class="__error")= lastName
+
+            if typeof email !== "undefined" 
+                if email.length > 0
+                    p(class="__error")= email
+
+            if typeof password !== "undefined" 
+                if password.length > 0
+                    p(class="__error")= password
+
+            form.ui.large.form(method="post", action="/signup")
+                .ui.stacked.segment
+                    +field('text', 'firstName', 'First name')
+                    +field('text', 'lastName', 'Last name')
+                    +field('email', 'email', 'your.email@address.tld')
+                    +field('password', 'password', 'Password')
+                    +field('password', 'password_confirm', 'Confirm password')
+                    button(type="submit").ui.fluid.large.brown.submit.button SignUp
+
+
+mixin field(type, name, placeholder)
+    .field
+        .ui.left.icon.input
+            i.icon(class=(type === 'password' ? 'lock' : 'user'))
+            input(type=type, name=name, placeholder=placeholder)

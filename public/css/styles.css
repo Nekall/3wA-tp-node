@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'Dice';
+    src: url('../fonts/dice.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #543c3c;
+    color: #ffffff;
+    text-align: center;
+}
+
+.menu{
+    margin: 0;
+}
+
+.__error{
+    color: #ffffff;
+    border-radius: 8px;
+    background-color: #FF0000;
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.__game{}
+
+.dices {
+    font-family: 'Dice';
+    font-size: 30px;
+    padding: 0 10px;
+}

@@ -1,5 +1,5 @@
 
-# Game Yams TP
+# 🍫 Game Yams TP
 ⚠️ This project needs a mongoDB database
               
 ### Features:
@@ -7,7 +7,7 @@
  - Registration on the signup page.
  - Login on the login page.
  - Session system.
- - Protections on the Profile & Game page.
+ - Protections on the Profile & Game page (need login).
  - Validation on the signup & login fields. (*Display without external
    package*)
  - Logout button.
@@ -20,7 +20,7 @@
 
 - Signup
 
-- Game (🛡️ need login for participate)
+- Game (🛡️ need login for participate )
 
 - Profile (🛡️ protect)
 
@@ -56,11 +56,11 @@ Packages
 
 ✅ - Utilisez Node.js, Express et un moteur de rendu comme pug ou twing. React peut-être également utiliser pour la partie "front".
 
-- Vous devez également créer une persistance pour les données avec MySQL ou MongoDB avec Mongoose pour Node.js et l'intégrer à l'API ou à l'application.
+✅ - Vous devez également créer une persistance pour les données avec MySQL ou MongoDB avec Mongoose pour Node.js et l'intégrer à l'API ou à l'application.
 
-- Il faudra également mettre en place une page de login pour lancer le YAMS.
+✅ - Il faudra également mettre en place une page de login pour lancer le YAMS.
 
-- Vous devez faire la partie interface utilisateur à partir du chapitre qui suit ci-dessous.
+✅ - Vous devez faire la partie interface utilisateur à partir du chapitre qui suit ci-dessous.
 
 ## Présentation générale
 

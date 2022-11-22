@@ -4,6 +4,14 @@ const MODEL_NAME = "Game";
 const COLLECTION_NAME = "game";
 
 const GameSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -18,7 +26,7 @@ const GameSchema = new mongoose.Schema({
   pastriesWin: {
     type: Array,
   },
-});
+}, { timestamps: true });
 
 export const Game = mongoose.model(
   MODEL_NAME,

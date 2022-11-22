@@ -1,9 +1,28 @@
 extends layouts/frontend
 
 block content
+    .__home_banner
     h1 Welcome to Chocolate Factory !
-    div
-        p Your Amazing Many Sugar (YAMS) Game
+    div.__game_cta
+        h2 Your Amazing Many Sugar - YAMS Game
         p Right now you can win pastries by participating to our great contest
         p Do not hesitate and participate now by clicking on the button just below!
-        a(href='/game').ui.brown.button Go to game page ! And win pastries !
+        if gameOver
+            h3= 'GAME OVER'
+        a(href='/game').ui.brown.button
+            if gameOver
+                | List of winners !
+            else
+                | Go to game page ! And win pastries !
+
+    .__home_photos
+        .__photo1
+            img(src='./image/photo1.webp' alt='Shop')
+        .__photo2
+            img(src='./image/photo2.webp' alt='Tiramusu')
+        .__photo3
+            img(src='./image/photo3.webp' alt='Chocolate Box')
+        .__photo4
+            img(src='./image/photo4.webp' alt='Brownie & coffee')
+
+

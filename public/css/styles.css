@@ -5,21 +5,32 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Wonderbar';
+    src: url('../fonts/Wonderbar.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
     font-family: sans-serif;
 }
 
-body{
+h1 {
+    font-family: 'Wonderbar';
+}
+
+body {
     background-color: #543c3c;
     color: #ffffff;
     text-align: center;
 }
 
-.menu{
+.menu {
     margin: 0;
 }
 
-.__error{
+.__error {
     color: #ffffff;
     border-radius: 8px;
     background-color: #FF0000;
@@ -28,10 +39,97 @@ body{
     font-weight: bold;
 }
 
-.__game{}
+.__game_banner {
+    background-image: url("../image/pastries.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px 0;
+    height: 250px;
+}
+
+.__game_cta{
+    margin: 50px;
+    padding: 10px;
+    background-color: rgb(65, 33, 33);
+    border-radius: 8px;
+}
+
+.__start_button {
+    display: grid;
+    margin: 15px auto;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.__start_button:after {
+    content: 'START 🎲';
+}
+
+.__start_button:focus:after,
+.__start_button:active:after {
+    content: 'Dice roll in progress...';
+}
 
 .dices {
     font-family: 'Dice';
     font-size: 30px;
     padding: 0 10px;
+}
+
+.__home_banner {
+    background-image: url("../image/whisk-full-of-chocolate.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px 0;
+    height: 500px;
+}
+
+.__home_photos {
+    display: grid;
+    place-items: center;
+    gap: 10px;
+  }
+
+  .__photo1,
+  .__photo2,
+  .__photo3,
+  .__photo4{
+    overflow: hidden;
+    box-shadow: 5px 5px 2px rgb(65, 33, 33);
+    height: 400px;
+    width: 450px;
+    opacity: 0.65;
+    transition: 0.5s;
+  }
+
+  .__photo1:hover,
+  .__photo2:hover,
+  .__photo3:hover,
+  .__photo4:hover{
+    opacity: 1;
+  }
+
+.__profile_banner {
+    background-image: url("../image/chocolate-bar.webp");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 10px 0;
+    height: 300px;
+}
+
+.__profile {
+    border-radius: 15px;
+    background-color: #765757;
+    display: inline-block;
+    padding: 50px 30px;
+}
+
+.__winners{
+    display: block;
+    text-align: start;
+    margin-bottom: 20px;
 }

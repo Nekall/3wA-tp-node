@@ -1,0 +1,13 @@
+extends layouts/frontend
+
+block content
+    h1 Your Amazing Many Sugar - YAMS Game !
+    h2 THE GAME IS OVER
+    h3 List of winners
+    ul
+        each winner in winners
+            li.__winners= '🏅 ' + winner.name + ' won ' 
+                ul
+                    each pastry in winner.pastries
+                        li= pastry.name
+                p= 'on ' + winner.date.toUTCString()

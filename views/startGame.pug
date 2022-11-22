@@ -1,7 +1,8 @@
 extends layouts/frontend
 
 block content
-    h1 Your Amazing Many Sugar (YAMS) Game !
+    h1 Your Amazing Many Sugar - YAMS Game !
+    .__game_banner
     p Right now you can win pastries by participating to our great contest
     h3 Rules :
     p To win you must have :
@@ -10,4 +11,4 @@ block content
         li A square corresponds to 2 pastries won at random. A square: 4 identical dice among the 5.
         li A double (double pair) is 1 pastry won at random. A double: 2 identical dice among the 5.
         form.ui.large.form(method="post", action="/game")
-            button(type="submit") START 🎲
+            button(type="submit").__start_button

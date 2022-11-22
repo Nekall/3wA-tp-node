@@ -13,25 +13,26 @@ html(lang="en")
 
         title Chocolate Factory
     body
-        .ui.inverted.menu.secondary.pointing.menu
-            a(href='/').item
-                i.home.icon
-                | Home
-            if isAuth
-                a(href='/game').item
-                    i.gamepad.icon
-                    | Game
-                a(href='/profile').item
-                    i.user.icon
-                    = firstName + ' ' + lastName
-                a(href='/logout').item
-                    i.power.icon
-                    | Logout
-            else
-                a(href='/login').item
-                    i.sign-in.icon
-                    | Login
-                a(href='/signup').item
-                    i.save.icon
-                    | Signup
+        .ui.inverted.secondary.right.menu
+            div.right.menu
+                a(href='/').item
+                    i.home.icon
+                    | Home
+                if isAuth
+                    a(href='/game').item
+                        i
+                        | 🎲 Game
+                    a(href='/profile').item
+                        i.user.icon
+                        = firstName + ' ' + lastName
+                    a(href='/logout').item
+                        i.power.icon
+                        | Logout
+                else
+                    a(href='/login').item
+                        i.sign-in.icon
+                        | Login
+                    a(href='/signup').item
+                        i.save.icon
+                        | Signup
         block content

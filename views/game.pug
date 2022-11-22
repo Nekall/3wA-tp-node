@@ -1,14 +1,14 @@
 extends layouts/frontend
 
 block content
-    h1 Your Amazing Many Sugar (YAMS) Game !
-    hr
+    h1 Your Amazing Many Sugar - YAMS Game !
+    .__game_banner
     h2 Here is the sequence of dice that you rolled :
     for dice in dicesYams
         span.dices= dice
     h2 Result : 
     if yamsResult === 0
-        p You loose !
+        p You lost, maybe another time !
     else
         div
             p You win #{yamsResult} pastries !

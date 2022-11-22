@@ -10,7 +10,14 @@ import { getRandomNumber } from "../utils/randomNumber.js";
 import { startYams } from "../utils/yams.js";
 
 export const home = async (req, res) => {
+  const games = await Game.find();
+  let numberOfPastriesWon = 0;
+  for (let game of games) {
+    numberOfPastriesWon = numberOfPastriesWon + game.pastriesWin.length;
+  }
+  const gameOver = numberOfPastriesWon >= 50 ? true : false
   res.render("home", {
+    gameOver: gameOver,
     isAuth: req.session.isAuth,
     firstName: req.session.firstName,
     lastName: req.session.lastName,
@@ -19,6 +26,25 @@ export const home = async (req, res) => {
 };
 
 export const game = async (req, res) => {
+  const games = await Game.find();
+  let numberOfPastriesWon = 0;
+  for (let game of games) {
+    numberOfPastriesWon = numberOfPastriesWon + game.pastriesWin.length;
+  }
+
+  if(numberOfPastriesWon >= 50) {
+
+    let winners =[];
+    for (let game of games) {
+      if(game.pastriesWin.length > 0) {
+        winners.push({ name: game.firstName + " " + game.lastName, pastries: game.pastriesWin, date: game.createdAt });
+      }
+    }
+    return res.render("endGame", {
+      winners: winners,
+    });
+  }
+
   if(await Game.findOne({ email: req.session.email }) !== null) {
     return res.render("game", {
       isAuth: req.session.isAuth,
@@ -61,6 +87,8 @@ export const game = async (req, res) => {
       choosePastry(req.session.yamsResult);
 
       Game.insertMany({ 
+        firstName: req.session.firstName,
+        lastName: req.session.lastName,
         email: req.session.email,
         dicesYams: [dice1, dice2, dice3, dice4, dice5],
         yamsResult: startYams(dice1, dice2, dice3, dice4, dice5),
@@ -76,7 +104,7 @@ export const game = async (req, res) => {
         yamsResult: req.session.yamsResult,
         pastriesWin: req.session.pastriesWin,
       });
-    }, 4000)
+    }, 2000)
   }
 };
 

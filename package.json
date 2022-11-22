@@ -4,7 +4,8 @@
   "description": "Chocolat Factory | Benjamin Anezo",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "dev": "NODE_ENV=env nodemon server.js",
+    "start": "NODE_ENV=prod node server.js"
   },
   "keywords": [],
   "author": "",

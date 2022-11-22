@@ -27,15 +27,22 @@
         
 
 ### Start
-
+      
 ```bash
 npm i
 ```
-
+      
 ```bash
 npm run start
 ```
-
+      
+```bash
+npm run dev
+```
+*When launching the application in development you have access to the following two debug routes:*
+- /gameData
+- /pastriesData
+      
 Packages
 [express](https://www.npmjs.com/package/express)
 [express-session](https://www.npmjs.com/package/express-session)

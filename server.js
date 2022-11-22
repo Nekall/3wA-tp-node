@@ -9,6 +9,7 @@ import { seed } from "./seed.js";
 
 // Routers
 import genericRouter from "./routes/generic.router.js";
+import debugRouter from "./routes/debug.router.js";
 
 // Init DB
 mongoose
@@ -34,7 +35,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "pug");
-app.locals.pretty = (NODE_ENV !== 'production');
+app.locals.pretty = (NODE_ENV !== 'prod');
 app.use(
   session({
     name : 'user',
@@ -51,3 +52,4 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routers
 app.use("/", genericRouter);
+if(NODE_ENV !== 'prod') app.use("/", debugRouter);

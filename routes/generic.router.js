@@ -12,8 +12,6 @@ import {
   signup,
   logout,
   profile,
-  pastries,
-  gameData,
 } from "../controllers/generic.controller.js";
 
 router.get("/", home);
@@ -30,9 +28,5 @@ router.get("/signup", signup);
 router.post("/signup", signup);
 
 router.get("/profile", authGuard, profile);
-
-router.get("/pastries", pastries);
-
-router.get("/gameData", gameData);
 
 export default router;

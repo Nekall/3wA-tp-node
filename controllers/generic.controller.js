@@ -15,7 +15,7 @@ export const home = async (req, res) => {
   for (let game of games) {
     numberOfPastriesWon = numberOfPastriesWon + game.pastriesWin.length;
   }
-  const gameOver = numberOfPastriesWon >= 50 ? true : false
+  const gameOver = numberOfPastriesWon >= 2 ? true : false;
   res.render("home", {
     gameOver: gameOver,
     isAuth: req.session.isAuth,
@@ -32,12 +32,15 @@ export const game = async (req, res) => {
     numberOfPastriesWon = numberOfPastriesWon + game.pastriesWin.length;
   }
 
-  if(numberOfPastriesWon >= 50) {
-
-    let winners =[];
+  if (numberOfPastriesWon >= 2) {
+    let winners = [];
     for (let game of games) {
-      if(game.pastriesWin.length > 0) {
-        winners.push({ name: game.firstName + " " + game.lastName, pastries: game.pastriesWin, date: game.createdAt });
+      if (game.pastriesWin.length > 0) {
+        winners.push({
+          name: game.firstName + " " + game.lastName,
+          pastries: game.pastriesWin,
+          date: game.createdAt,
+        });
       }
     }
     return res.render("endGame", {
@@ -45,7 +48,7 @@ export const game = async (req, res) => {
     });
   }
 
-  if(await Game.findOne({ email: req.session.email }) !== null) {
+  if ((await Game.findOne({ email: req.session.email })) !== null) {
     return res.render("game", {
       isAuth: req.session.isAuth,
       firstName: req.session.firstName,
@@ -57,42 +60,43 @@ export const game = async (req, res) => {
     });
   }
 
-  if (req.method === "GET" ) {
-      res.render("startGame", {
-        isAuth: req.session.isAuth,
-        firstName: req.session.firstName,
-        lastName: req.session.lastName,
-        email: req.session.email,
-        yamsResult: req.session.yamsResult,
-        pastriesWin: req.session.pastriesWin,
-      });
+  if (req.method === "GET") {
+    res.render("startGame", {
+      isAuth: req.session.isAuth,
+      firstName: req.session.firstName,
+      lastName: req.session.lastName,
+      email: req.session.email,
+      yamsResult: req.session.yamsResult,
+      pastriesWin: req.session.pastriesWin,
+    });
   } else if (req.method === "POST") {
     let dice1 = getRandomNumber(1, 6);
     let dice2 = getRandomNumber(1, 6);
     let dice3 = getRandomNumber(1, 6);
     let dice4 = getRandomNumber(1, 6);
     let dice5 = getRandomNumber(1, 6);
-    const pastries = await Pastries.find().then(pastry=>pastry);
+    const pastries = await Pastries.find().then((pastry) => pastry);
 
     setTimeout(() => {
       req.session.dicesYams = [dice1, dice2, dice3, dice4, dice5];
       req.session.yamsResult = startYams(dice1, dice2, dice3, dice4, dice5);
 
       const choosePastry = (yamsResult) => {
-        for(let i = 0; i < yamsResult; i++) {
+        for (let i = 0; i < yamsResult; i++) {
           let random = getRandomNumber(0, 7);
           req.session.pastriesWin.push(pastries[random]);
         }
-      }
+      };
       choosePastry(req.session.yamsResult);
 
-      Game.insertMany({ 
+      Game.insertMany({
         firstName: req.session.firstName,
         lastName: req.session.lastName,
         email: req.session.email,
         dicesYams: [dice1, dice2, dice3, dice4, dice5],
         yamsResult: startYams(dice1, dice2, dice3, dice4, dice5),
-        pastriesWin: req.session.yamsResult === 0 ? [] : req.session.pastriesWin,
+        pastriesWin:
+          req.session.yamsResult === 0 ? [] : req.session.pastriesWin,
       });
 
       res.render("game", {
@@ -104,7 +108,7 @@ export const game = async (req, res) => {
         yamsResult: req.session.yamsResult,
         pastriesWin: req.session.pastriesWin,
       });
-    }, 2000)
+    }, 2000);
   }
 };
 
@@ -156,29 +160,29 @@ export const login = (req, res) => {
   } else if (req.method === "POST") {
     let validators = loginValidators(req.body);
     if (validators.noErrors) {
-
       Users.findOne({ email: req.body.email })
         .then((user) => {
           if (user) {
-            bcrypt.compare(req.body.password, user.password).then(async (result) => {
-              if (result) {
-                await Game.findOne({ email: user.email })
-                .then((game) => {
+            bcrypt
+              .compare(req.body.password, user.password)
+              .then(async (result) => {
+                if (result) {
+                  await Game.findOne({ email: user.email }).then((game) => {
                     req.session.dicesYams = game ? game.dicesYams : [];
                     req.session.yamsResult = game ? game.yamsResult : 0;
                     req.session.pastriesWin = game ? game.pastriesWin : [];
-                });
-                req.session.isAuth = true;
-                req.session.firstName = user.firstName;
-                req.session.lastName = user.lastName;
-                req.session.email = user.email;
-                res.redirect("/profile");
-              } else {
-                return res.render("login", {
-                  email: "Password is not correct",
-                });
-              }
-            });
+                  });
+                  req.session.isAuth = true;
+                  req.session.firstName = user.firstName;
+                  req.session.lastName = user.lastName;
+                  req.session.email = user.email;
+                  res.redirect("/profile");
+                } else {
+                  return res.render("login", {
+                    email: "Password is not correct",
+                  });
+                }
+              });
           } else {
             return res.render("login", {
               email: "No account with this email address was found.",
@@ -213,13 +217,3 @@ export const profile = (req, res) => {
     email: req.session.email,
   });
 };
-
-export const pastries = async (req, res) => {
-  const pastries = await Pastries.find();
-  res.json(pastries);
-};
-
-export const gameData = async (req, res) => {
-  const gameData = await Game.find();
-  res.json(gameData);
-}
